@@ -1,18 +1,32 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <div>home</div>
+    <router-link to="/scanning">扫码</router-link>
+    <div>{{scanResult}}</div>
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+<script lang="ts">
+  import Vue from 'vue';
+  import {Component} from 'vue-property-decorator';
+  import Bus from '@/helper/bus';
 
-export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  @Component
+  export default class Home extends Vue {
+    scanResult = '';
+
+    mounted() {
+      Bus.$on('transferScanResult', (res: string) => {
+        this.scanResult = res;
+      });
+    }
+
+    beforeDestroyed() {
+      Bus.$off('transferScanResult');
+    }
   }
-}
 </script>
+
+<style lang="scss" scoped>
+
+</style>
