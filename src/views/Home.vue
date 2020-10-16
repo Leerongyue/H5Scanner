@@ -6,24 +6,22 @@
   </div>
 </template>
 
-<script lang="ts">
-  import Vue from 'vue';
-  import {Component} from 'vue-property-decorator';
+<script lang="js">
   import Bus from '@/helper/bus';
-
-  @Component
-  export default class Home extends Vue {
-    scanResult = '';
-
+  export default {
+    data() {
+      return {
+        scanResult: ''
+      }
+    },
     mounted() {
-      Bus.$on('transferScanResult', (res: string) => {
+      Bus.$on('transferScanResult', (res) => {
         this.scanResult = res;
       });
-    }
-
+    },
     beforeDestroyed() {
       Bus.$off('transferScanResult');
-    }
+    },
   }
 </script>
 
