@@ -6,6 +6,7 @@
 </template>
 
 <script lang="js">
+  import adapter from 'webrtc-adapter';
   import {BrowserMultiFormatReader} from '@zxing/library'
   import Bus from '@/helper/bus'
 
